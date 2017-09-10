@@ -1,6 +1,7 @@
 html {
   min-height: 320px;
   min-width: 540px;
+  background-color: #17141f;
 }
 
 body {
@@ -9,6 +10,34 @@ body {
 }
 
 #searchHeader {
-  height: 40px;
-  background-color: #000;
+  height: 50px;
+  background-color: #4b367c;
+  display: flex;
+}
+
+#searchBar {
+  width: 200px;
+  height: 30px;
+  margin: auto;
+  background-color: #FFF;
+  opacity: 0.4;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+   background-color: rgba(0,0,0,0);
+  -webkit-border-radius: 80px;
+}
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  background: rgba(0,0,0,0.61);
+  -webkit-border-radius: 80px;
+}
+::-webkit-scrollbar-thumb:vertical:active {
+  background: rgba(0,0,0,0.61);
+  -webkit-border-radius: 80px;
 }
