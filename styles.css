@@ -1,0 +1,14 @@
+html {
+  min-height: 320px;
+  min-width: 540px;
+}
+
+body {
+  margin:0px !important;
+  border-radius: 5px;
+}
+
+#searchHeader {
+  height: 40px;
+  background-color: #000;
+}
