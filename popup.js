@@ -62,6 +62,7 @@ function loadGames() {
     console.log("hello");
     for(var i = 0; i < data["top"].length; i++) {
       var game = document.createElement('div');
+      game.className = 'game';
 
       game.style.width = '136px';
       game.style.height = '190px';
@@ -85,11 +86,27 @@ function loadGames() {
 }
 
 function loadChannels(evt) {
-  if(evt.channels == nil) {}
+  if(evt.channels == null) {
     var gameName = evt.target.data["top"][evt.target.index]["game"]["name"];
-    var url = "https://api.twitch.tv/kraken/streams?game=" + gameName + "&client_id=" + clientId;
+    var url = "https://api.twitch.tv/kraken/streams?limit=20&game=" + gameName + "&client_id=" + clientId;
     getJSON(url, function(err, data) {
-      console.log(data);
+      var contentWindow = document.getElementById("contentWindow");
+      contentWindow.innerHTML = "";
+
+      var bgc = [255, 255, 255];
+
+      for(var i = 0; i < data["streams"].length; i++) {
+        var channel = document.createElement('div');
+        channel.className = 'channel';
+        // channel.style.backgroundColor = 'rgba(' + [bgc[0],bgc[1],bgc[2],0.4].join(',') + ')';
+        channel.style.borderBottom = '1px solid white';
+        channel.style.height = '30px';
+        channel.style.width = '540px';
+        // channel.style.float = 'left';
+        channel.textContent = data["streams"][i]["channel"]["display_name"];
+
+        contentWindow.appendChild(channel);
+      }
     });
   } else {
     //means that i need to load some user saved data instead
