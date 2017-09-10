@@ -101,15 +101,20 @@ function loadChannels(evt) {
 
       for(var i = 0; i < data["streams"].length; i++) {
         var channel = document.createElement('div');
+        var channelData = data["streams"][i];
         channel.className = 'channel';
         channel.style.backgroundColor = 'rgba(' + [bgc[0],bgc[1],bgc[2],0.4].join(',') + ')';
         channel.style.borderBottom = '1px solid rgba(' + [0, 0, 0, 0.3].join(',') + ')';
         channel.style.height = '30px';
         channel.style.width = '540px';
-        channel.textContent = data["streams"][i]["channel"]["display_name"];
+        console.log(channelData["viewers"]);
+        channel.textContent = channelData["viewers"] + " viewers / " + channelData["channel"]["display_name"] + " / " + channelData["channel"]["status"];
         channel.style.color = rgbaTrans(0, 0, 0, 0.7);
         channel.style.lineHeight = '30px';
         channel.style.paddingLeft = '15px';
+
+        channel.channelName = channelData["channel"]["display_name"];
+        channel.addEventListener("click", openStream, false);
 
         contentWindow.appendChild(channel);
       }
@@ -117,4 +122,11 @@ function loadChannels(evt) {
   } else {
     //means that i need to load some user saved data instead
   }
+}
+
+function openStream(evt) {
+  var extensionWindow = document.getElementById('extensionWindow');
+
+  extensionWindow.innerHTML = "";
+  extensionWindow.innerHTML = '<iframe id="twitchPlayer" src="https://player.twitch.tv/?channel=' + evt.target.channelName +'&muted=true" height="320" width="540" frameborder="0" scrolling="no" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe>'
 }

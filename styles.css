@@ -33,6 +33,12 @@ body {
   overflow-y: scroll;
 }
 
+.channel {
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 540px;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
    background-color: rgba(0,0,0,0);
