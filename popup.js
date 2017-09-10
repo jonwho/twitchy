@@ -18,6 +18,25 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 15);
 }, false);
 
+function rgbaTrans(r, g, b, a) {
+  return 'rgba(' + [r, g, b, a].join(',') + ')';
+}
+
+var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status, xhr.response);
+      }
+    };
+    xhr.send();
+};
+
 function loadChannelsPage() {
   var header = document.getElementById('header');
   var contentWindow = document.getElementById('contentWindow');
@@ -37,21 +56,6 @@ function loadChannelsPage() {
   header.appendChild(searchHeader);
   contentWindow.appendChild(games);
 }
-
-var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
-};
 
 function loadGames() {
   var games = document.createElement('div');
@@ -98,12 +102,14 @@ function loadChannels(evt) {
       for(var i = 0; i < data["streams"].length; i++) {
         var channel = document.createElement('div');
         channel.className = 'channel';
-        // channel.style.backgroundColor = 'rgba(' + [bgc[0],bgc[1],bgc[2],0.4].join(',') + ')';
-        channel.style.borderBottom = '1px solid white';
+        channel.style.backgroundColor = 'rgba(' + [bgc[0],bgc[1],bgc[2],0.4].join(',') + ')';
+        channel.style.borderBottom = '1px solid rgba(' + [0, 0, 0, 0.3].join(',') + ')';
         channel.style.height = '30px';
         channel.style.width = '540px';
-        // channel.style.float = 'left';
         channel.textContent = data["streams"][i]["channel"]["display_name"];
+        channel.style.color = rgbaTrans(0, 0, 0, 0.7);
+        channel.style.lineHeight = '30px';
+        channel.style.paddingLeft = '15px';
 
         contentWindow.appendChild(channel);
       }

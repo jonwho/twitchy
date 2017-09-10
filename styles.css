@@ -26,9 +26,11 @@ body {
 }
 
 #contentWindow {
+  position: absolute;
   max-height: 270px;
   height: 270px;
   display: inline-block;
+  overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
